@@ -56,3 +56,41 @@ func TTypeCase() {
 		ch1 <- addr
 	}
 }
+
+// generic slice
+type List[T any] []T
+
+// generic map
+type MapT[k comparable, v any] map[k]v
+
+type Chan[T any] chan T
+
+func TTypeCase1() {
+	userMp := make(MapT[int64, user], 0)
+	userMp[1] = user{ID: 1, Name: "John", Age: 20}
+	userMp[2] = user{ID: 2, Name: "Jane", Age: 21}
+
+	var userList List[user]
+	userList = mapToList[int64, user](userMp)
+
+	ch := make(Chan[user])
+	go myPrintln(ch)
+	for _, u := range userList {
+		ch <- u
+	}
+
+	fmt.Println("======================")
+
+	addressMp := make(MapT[int, address], 0)
+	addressMp[1] = address{ID: 1, City: "New York", State: "NY"}
+	addressMp[2] = address{ID: 2, City: "Los Angeles", State: "CA"}
+
+	var addrLit List[address]
+	addrLit = mapToList[int, address](addressMp)
+
+	ch1 := make(Chan[address])
+	go myPrintln(ch1)
+	for _, addr := range addrLit {
+		ch1 <- addr
+	}
+}

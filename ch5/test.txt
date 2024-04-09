@@ -1,0 +1,5 @@
+The command found the local code in the greetings directory, then added a require directive to specify that example.com/hello requires example.com/greetings. You created this dependency when you imported the greetings package in hello.go.
+
+The number following the module path is a pseudo-version number -- a generated number used in place of a semantic version number (which the module doesn't have yet).
+
+To reference a published module, a go.mod file would typically omit the replace directive and use a require directive with a tagged version number at the end.

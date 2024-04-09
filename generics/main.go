@@ -16,6 +16,8 @@ func main() {
 	_case.BuiltInCase()
 	fmt.Println("======================")
 	_case.TTypeCase()
+	fmt.Println("======================")
+	_case.TTypeCase1()
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
 	defer stop()
