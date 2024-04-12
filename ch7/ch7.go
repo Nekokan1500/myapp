@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	//depend "myapp/ch7/dependency"
+	//"net/http"
+	ex "myapp/ch7/exercises"
 	"time"
 )
 
@@ -42,16 +45,21 @@ type Incrementer interface {
 }
 
 func main() {
-	fmt.Println(Field1, Field2, Field3, Field4, Field5)
-	fmt.Println(Field6, Field7, Field8, Field9, Field10)
+	/*
+		l := depend.LoggerAdapter(depend.LogOutput)
+		ds := depend.NewSimpleDataStore()
+		logic := depend.NewSimpleLogic(l, ds)
+		c := depend.NewController(l, logic)
+		http.HandleFunc("/hello", c.SayHello)
+		http.ListenAndServe(":8080", nil)
+	*/
+	league := ex.League{
+		Teams: []string{"Manchester United", "Chelsea", "Arsenal"},
+		Wins: map[string]int{
+			"Manchester United": 0,
+			"Chelsea":           0,
+			"Arsenal":           0,
+		},
+	}
 
-	var myStringer fmt.Stringer
-	var myIncrementer Incrementer
-	pointerCounter := &Counter{}
-	valueCounter := Counter{}
-	myStringer = pointerCounter // ok
-	myStringer = valueCounter   // ok
-
-	myIncrementer = pointerCounter // ok
-	//myIncrementer = valueCounter // compile-time error!
 }
