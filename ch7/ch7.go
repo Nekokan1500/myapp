@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	//depend "myapp/ch7/dependency"
 	//"net/http"
 	ex "myapp/ch7/exercises"
@@ -54,12 +56,22 @@ func main() {
 		http.ListenAndServe(":8080", nil)
 	*/
 	league := ex.League{
-		Teams: []string{"Manchester United", "Chelsea", "Arsenal"},
+		Teams: []ex.Team{
+			{Name: "ManUnited"},
+			{Name: "Chelsea"},
+			{Name: "Arsenal"},
+		},
 		Wins: map[string]int{
-			"Manchester United": 0,
-			"Chelsea":           0,
-			"Arsenal":           0,
+			"ManUnited": 0,
+			"Chelsea":   0,
+			"Arsenal":   0,
 		},
 	}
+
+	league.MatchResult("ManUnited", 2, "Chelsea", 1)
+	league.MatchResult("Arsenal", 2, "Chelsea", 1)
+	league.MatchResult("ManUnited", 2, "Arsenal", 1)
+
+	ex.RankPrinter(league, os.Stdout)
 
 }

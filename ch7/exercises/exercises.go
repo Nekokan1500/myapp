@@ -1,9 +1,12 @@
 package exercises
 
-import "sort"
+import (
+	"io"
+	"sort"
+)
 
 type Team struct {
-	name    string
+	Name    string
 	players []string
 }
 
@@ -38,4 +41,16 @@ func (l League) Ranking() []string {
 		ranking = append(ranking, pair.key)
 	}
 	return ranking
+}
+
+type Ranker interface {
+	Ranking() []string
+}
+
+func RankPrinter(r Ranker, w io.Writer) {
+	ts := r.Ranking()
+	for _, v := range ts {
+		io.WriteString(w, v)
+		w.Write([]byte("\n"))
+	}
 }
